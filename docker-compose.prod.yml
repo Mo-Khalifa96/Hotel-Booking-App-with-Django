@@ -1,0 +1,79 @@
+#production compose file
+version: '3.9'
+
+services:
+  web:
+    ports: []
+    env_file:
+      - .env
+    volumes:
+      - static-data:/app/static
+      - media-data:/app/media
+    restart: always
+    command: ./wait-for-it.sh mysql:3306 -- ./docker-entrypoint.sh
+
+  mysql:
+    ports: []
+    env_file:
+      - .env
+    environment:
+      MYSQL_DATABASE: ${DB_NAME}
+      MYSQL_USER: ${DB_USER}
+      MYSQL_PASSWORD: ${DB_PASSWORD}
+      MYSQL_ROOT_PASSWORD: ${DB_ROOTPASSWORD}
+
+  redis:
+    ports: []
+    env_file:
+      - .env
+    restart: always 
+
+  celery:
+    volumes: []
+    env_file:
+      - .env
+    restart: always
+
+  celery-beat:
+    volumes: []
+    env_file:
+      - .env
+    restart: always
+
+  flower:
+    ports: [] 
+
+  tests:
+    volumes: []
+    tty: false
+
+  nginx:
+    build:
+      context: ./nginx
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - static-data:/app/static
+      - media-data:/app/media
+      - certbot-etc:/etc/letsencrypt
+      - certbot-var:/var/lib/letsencrypt
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro  
+      - ./nginx/ssl:/var/www/certbot
+    depends_on:
+      - web
+
+  certbot:
+    image: certbot/certbot
+    volumes:
+      - certbot-etc:/etc/letsencrypt
+      - certbot-var:/var/lib/letsencrypt
+      - ./nginx/ssl:/var/www/certbot
+
+volumes:
+  mysql-data: 
+  redis-data:
+  static-data:
+  media-data:
+  certbot-etc:
+  certbot-var:

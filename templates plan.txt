@@ -1,0 +1,42 @@
+templates/
+├── base.html                # The base template (common header/footer/navigation)
+├── home.html 
+│
+├── accounts/                   # For account management templates
+│   ├── login.html  # form login
+│   ├── password_change_form.html  # For changing user password
+│   ├── password_change_success.html  # Success page after changing password 
+│   ├── password_reset_confirm.html  # Confirmation for changing password via email 
+│   ├── password_reset_email_sent.html  # Success page after sending reset email
+│   ├── password_reset_form.html  # Password change form  
+│   ├── password_reset_success.html  # Success page after password reset 
+│   └── registeration.html  # Registeration form  
+│
+├── booking/                   # For booking-related templates 
+│   ├── booking_form.html  # form for booking 
+│   └── booking_successful.html  # Success booking page 
+│
+├── branches/                        # For branch-related templates
+│   ├── preview_branches.html   # Preview all available branches 
+│   ├── preview_room_types.html  # Preview Room Types (for advertisement)
+│   ├── about.html             # Branch About page 
+│   └── contact_us.html        # Branch Contact Us page
+│
+├── staff/                   # For staff-related templates
+│   ├── staff_home.html        # Staff home page
+│   ├── bookings_list.html      # Bookings by branch
+│   ├── booking_detail.html    # Individual booking details (staff view)
+│   ├── delete_booking.html    # Staff delete booking page
+│   └── delete_booking_successful.html    # Delete success message for staff 
+│
+├── guests/                   # For guest-related templates
+│   ├── guest_home.html      # Guest home page
+│   ├── guest_me.html   # Profile page of registered guest 
+│   ├── booking_request.html   # Guest booking request form
+│   ├── booking_detail.html   # Guest booking detail page
+│   ├── booking_change.html    # Guest change booking form
+│   ├── booking_change_successful.html    # Guest change booking success page 
+│   ├── room_change.html       # Guest change room form
+│   ├── room_change_successful.html    # Guest change booking success page 
+│   ├── delete_booking.html    # Guest delete booking form
+│   └── delete_booking_successful.html  # Delete success message for guest 

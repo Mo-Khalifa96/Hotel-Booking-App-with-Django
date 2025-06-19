@@ -1,0 +1,13 @@
+.env
+*.pem
+*.pyc
+__pycache__/
+/media/
+/static/
+*.log
+general.log
+*.sqlite3
+*.seeded
+venv/
+.env/
+pip-wheel-metadata/

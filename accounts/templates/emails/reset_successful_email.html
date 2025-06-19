@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Password Reset Successful</title>
+  </head>
+
+  <body style="font-family: Verdana, Geneva, Tahoma, sans-serif; background-color: whitesmoke; padding: 40px;">
+    <div style="max-width: 700px; margin: auto; background-color: rgba(255,255,255,0.95); padding: 30px 40px; border-radius: 10px; box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);">
+
+      <div style="background: radial-gradient(rgb(188, 188, 206), #222324 65%); color: ghostwhite; padding: 25px; border-radius: 8px 8px 0 0;">
+        <h2 style="margin: 0;">Khalifa Hotels</h2>
+        <p style="margin: 5px 0 0 0;">Password Reset Confirmation</p>
+      </div>
+
+      <div style="padding: 25px 0 0 0;">
+        <p style="font-size: 16px;">Hi {{ first_name }} {{ last_name }},</p>
+
+        <p>Your password has been <strong>reset successfully</strong>.</p>
+
+        <p>You can now log in using your new credentials.</p>
+
+        <div style="text-align: center; margin: 30px 0;">
+          <a href="{{ login_url }}" style="background-color: steelblue; color: ghostwhite; padding: 12px 24px; border-radius: 6px; text-decoration: none; font-weight: bold; display: inline-block;">
+            Click here to log in
+          </a>
+        </div>
+
+        <p style="color: #e74c3c; font-size: 14px;">
+          If you did not request this password reset, please contact our support team immediately.
+        </p>
+
+        <p style="margin-top: 40px;">Thank you,</p>
+        <p style="font-style: italic;">The Support Team</p>
+      </div>
+    </div>
+  </body>
+</html>

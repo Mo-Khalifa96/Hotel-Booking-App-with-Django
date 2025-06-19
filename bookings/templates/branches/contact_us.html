@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="text-center mb-5">
+    <h2 class="custom-title">Contact {{ branch.name }}</h2>
+</div>
+
+<div class="container p-4" style="max-width: 700px;">
+    <div class="card shadow-sm p-4">
+        <p><strong>Address:</strong> {{ branch.address }}, {{ branch.zipcode }}</p>
+        <p><strong>Phone:</strong> {{ branch.phone_number }}</p>
+        <p><strong>Email:</strong> <a href="mailto:{{ branch.email }}">{{ branch.email }}</a></p>
+        {% if branch.website %}
+        <p><strong>Website:</strong> <a href="{{ branch.website }}" target="_blank">{{ branch.website }}</a></p>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

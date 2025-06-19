@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Registeration Successful</title>
+  </head>
+  <body style="font-family: Verdana, Geneva, Tahoma, sans-serif; background-color: whitesmoke; padding: 40px;">
+    <div style="max-width: 700px; margin: auto; background-color: rgba(255,255,255,0.95); padding: 30px 40px; border-radius: 10px; box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);">
+
+      <div style="background: radial-gradient(rgb(188, 188, 206), #222324 65%); color: ghostwhite; padding: 25px; border-radius: 8px 8px 0 0;">
+        <h2 style="margin: 0;">Welcome to Khalifa Hotels</h2>
+        <p style="margin: 5px 0 0 0;">Account Registration Successful</p>
+      </div>
+
+      <div style="padding: 25px 0 0 0;">
+        <p style="font-size: 16px;">Welcome {{ first_name }} {{ last_name }},</p>
+
+        <p>Thank you for registering with <strong>Khalifa Hotels</strong> — we’re thrilled to have you on board.</p>
+
+        <p>Your account has been created successfully and you're now part of our growing community of guests.</p>
+        
+        <div style="text-align: center; margin: 30px 0;">
+          <a href="{{ login_url }}" style="background-color: steelblue; color: ghostwhite; padding: 12px 24px; border-radius: 6px; text-decoration: none; font-weight: bold; display: inline-block;">
+            Click here to log in
+          </a>
+        </div>
+        <br>
+
+        <p>If you have any questions or need help, feel free to reach out to our support team anytime.</p>
+
+        <p style="margin-top: 40px;">Warm regards,</p>
+        <p style="font-style: italic;">Khalifa Hotels</p>
+      </div>
+    </div>
+  </body>
+</html>

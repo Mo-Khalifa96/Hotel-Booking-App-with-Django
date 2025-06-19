@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="text-end my-1 me-4">
+    <a href="{% url 'staff_logout' %}" class="btn btn-outline-danger btn-sm">Logout</a>
+</div>
+
+<div class="container mt-4 text-center">
+    <h2 class="mb-4">Welcome, Staff Member</h2>
+    <p class="lead">Select a branch to view bookings:</p>
+
+    <div class="row justify-content-center">
+        {% for branch in branches %}
+        <div class="col-md-6 col-lg-4 mb-4">
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <img src="{{ branch.branch_img.url }}" class="card-img-top mt-2 mb-3" alt="{{ branch.name }}"
+                        style="height: 180px; object-fit: cover;">
+                    <h5 class="card-title">{{ branch.name }}</h5>
+                    <a href="{% url 'bookings_by_branch' branch.branch_slug %}" class="btn btn-outline-primary mt-2">
+                        View Bookings
+                    </a>
+                </div>
+                <br>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

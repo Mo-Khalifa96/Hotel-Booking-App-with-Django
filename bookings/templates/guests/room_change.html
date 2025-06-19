@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% load widget_tweaks %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2 class="mb-4">Change Room</h2>
+
+    <form method="post">
+        {% csrf_token %}
+        {% for field in form %}
+        <div class="mb-3">
+            <label for="{{ field.id_for_label }}" class="form-label">{{ field.label }}</label>
+            {% if field.name == "new_room" %}
+            {{ field|add_class:"form-select" }}
+            {% else %}
+            {{ field|add_class:"form-control" }}
+            {% endif %}
+            {% if field.errors %}
+            <div class="text-danger small">{{ field.errors|striptags }}</div>
+            {% endif %}
+        </div>
+        {% endfor %}
+
+        <div class="d-flex justify-content-between mt-4">
+            <a href="{% url 'booking_detail_for_guest' id=object.id %}" class="btn btn-secondary">Cancel</a>
+
+            <button type="submit" style="background-color:#ffb900;" class="btn btn-info text-white">Change Room</button>
+        </div>
+    </form>
+</div>
+{% endblock %}

@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Khalifa Hotels</title>
+
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poiret+One&display=swap" rel="stylesheet">
+
+    <!-- Custom Styles -->
+    <style>
+        body {
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+            background-color: whitesmoke;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background: radial-gradient(rgb(188, 188, 206), #222324 65%);
+            color: ghostwhite;
+            padding: 18px 0;
+            height: 260px;
+            
+            border-bottom-left-radius: 2%;
+            border-bottom-right-radius: 2%;
+        }
+
+        header h1 {
+            font-size: 75px;
+            margin-bottom: 12px;
+            font-weight: bold;
+        }
+
+        nav a {
+            color: ghostwhite;
+            margin: 0 15px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.2s ease-in-out;
+        }
+
+        nav a:hover,
+        nav a.active {
+            color: #303335;
+        }
+        
+        .custom-title {
+            font-family: 'Poiret One', monospace;
+        }
+        
+        .container {
+            margin-top: 40px;
+            margin-bottom: 40px;
+            padding: 20px;
+            max-width: 880px;
+            background-color: rgba(255, 255, 255, 0.82);
+            border-radius: 8px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+        }
+
+
+        .header-container {
+            margin-top: 40px;
+            margin-bottom: 40px;
+            padding: 20px;
+            background-color: rgba(41, 46, 49, 0.25);
+            border-radius: 8px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+        }
+
+        footer {
+            background-color: rgb(191, 85, 85);
+            color: white;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+        }
+
+        
+        .btn {
+            border-radius: 5px;
+            color:white;
+            background-color: steelblue;
+            border-color:aliceblue;
+        }
+
+        .btn:hover {
+            background-color: rgb(103, 159, 205);
+            border-color:aliceblue;
+        }
+        
+    </style>
+
+    {% block extra_css %}
+    {% endblock %}
+</head>
+
+<body>
+
+    <header class="text-center">
+        <div class="header-container">
+            <h1 class="custom-title">Khalifa Hotels</h1>
+            <nav>
+                <a href="{% url 'home' %}"
+                    class="{% if request.resolver_match.url_name == 'home' %}active{% endif %}">Home</a>
+                <a href="{% url 'branches_all' %}"
+                    class="{% if request.resolver_match.url_name == 'branches_all' %}active{% endif %}">Branches</a>
+                <a href="{% url 'guest_home' %}"
+                    class="{% if request.resolver_match.url_name == 'guest_home' %}active{% endif %}">Guest</a>
+                <a href="{% url 'staff_login' %}"
+                    class="{% if request.resolver_match.url_name == 'staff_login' %}active{% endif %}">Staff</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container" style="background: rgba(221, 237, 251, 0.75); backdrop-filter: blur(10px); border-radius: 12px; width: 90%; max-width: 1000px; padding: 40px; height: auto;">
+        {% block content %}
+        {% endblock %}
+    </main>
+
+    <footer>
+        <p class="mb-0">&copy; 2025 Khalifa Hotels. All rights reserved.</p>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>

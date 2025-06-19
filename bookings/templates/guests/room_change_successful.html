@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<!-- Auto-redirect after 5 seconds -->
+<meta http-equiv="refresh" content="5;url={% url 'guest_home' %}" />
+
+<div class="container mt-5 text-center">
+    <h2 class="text-success">Room Changed Successfully!</h2>
+    <p class="mt-3">Your new room assignment has been saved.</p>
+    <br>
+    <p>Redirecting you to the guest homepage...</p>
+    <p><a href="{% url 'guest_home' %}">Click here</a> if you're not redirected automatically.</p>
+</div>
+
+{% endblock %}

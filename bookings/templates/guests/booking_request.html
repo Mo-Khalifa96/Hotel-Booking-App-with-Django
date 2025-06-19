@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% load widget_tweaks %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2 class="text-center">View Your Reservation</h2>
+    <p class="text-center text-muted">Enter your details to retrieve your booking</p>
+
+    <form method="post" class="mt-4">
+        {% csrf_token %}
+        <div class="mb-3">
+            <label for="id_guest_first_name" class="form-label">First Name</label>
+            {{ form.guest_first_name | add_class:'form-control' }}
+        </div>
+
+        <div class="mb-3">
+            <label for="id_guest_last_name" class="form-label">Last Name</label>
+            {{ form.guest_last_name | add_class:'form-control' }}
+        </div>
+
+        <div class="mb-3">
+            <label for="email_or_phone" class="form-label">Email or Phone Number</label>
+            {{ form.email_or_phone | add_class:'form-control' }}
+        </div>
+
+        {% if form.non_field_errors %}
+        <div class="alert alert-danger">
+            {{ form.non_field_errors }}
+        </div>
+        {% endif %}
+
+        <a href="{% url 'guest_home' %}" class="btn btn-primary mb-1 mt-3">Cancel</a>
+        <button type="submit" class="btn btn-secondary ms-2 mb-1 mt-3">Find My Booking</button>
+    </form>
+</div>
+{% endblock %}

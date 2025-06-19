@@ -1,0 +1,90 @@
+#base docker compose file (for dev and prod)
+#version: '3.9'
+services:
+  web:
+    build: .
+    command: ./wait-for-it.sh mysql:3306 -- ./docker-entrypoint.sh
+    restart: on-failure
+    volumes:
+      - .:/app
+    ports:
+      - 8000:8000
+    depends_on:
+      - mysql
+      - redis
+
+  mysql:
+    image: mysql:8.0
+    restart: always
+    volumes:
+      - mysql-data:/var/lib/mysql
+    environment:
+      MYSQL_DATABASE: ${DEV_DB_NAME}
+      MYSQL_USER: ${DEV_DB_USER}
+      MYSQL_PASSWORD: ${DEV_DB_PASSWORD}
+      MYSQL_ROOT_PASSWORD: ${DEV_DB_ROOTPASSWORD}
+    ports:
+      - "3306:3306"
+
+  redis:
+    image: redis:7.2-alpine
+    restart: always
+    ports:
+      - 6379:6379
+    volumes:
+      - redis-data:/data
+
+  smtp4dev:
+    image: rnwood/smtp4dev:v3
+    ports:
+      - 5025:80 
+    restart: always
+    profiles: ["dev"]
+
+  celery:
+    build: .
+    command: ./wait-for-it.sh redis:6379 -- celery -A HotelBookingProject worker --loglevel=info
+    volumes:
+      - .:/app
+    depends_on:
+      - redis
+
+  celery-beat:
+    build: .
+    command: ./wait-for-it.sh mysql:3306 -- ./wait-for-it.sh redis:6379 -- celery -A HotelBookingProject beat --loglevel=info
+    volumes:
+      - .:/app
+    depends_on:
+      - mysql
+      - redis
+
+  flower:
+    build: .
+    command: ./wait-for-it.sh redis:6379 -- celery -A HotelBookingProject flower
+    depends_on:
+      - web
+      - redis
+      - celery
+    environment:
+      - DEBUG=1
+      - CELERY_BROKER=redis://redis:6379/0
+      - CELERY_BACKEND=redis://redis:6379/0
+    ports:
+      - 5555:5555
+    profiles: ["dev"]
+
+  tests:
+    build: .
+    command: ./wait-for-it.sh mysql:3306 -- ptw
+    depends_on:
+      - redis
+      - mysql
+    tty: true
+    volumes:
+      - .:/app
+    profiles: ["dev"]
+
+volumes:
+  mysql-data:
+  redis-data:
+

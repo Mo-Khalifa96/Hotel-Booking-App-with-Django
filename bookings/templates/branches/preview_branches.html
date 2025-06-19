@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container py-0" style=" background-color:rgb(249, 253, 255); background-blend-mode:color-burn;">
+    {% for branch in branches_list %}
+    <div class="row mb-4 align-items-center bg-white shadow-sm rounded p-4"
+        style="background: rgba(255, 255, 255, 0.9);">
+        <!-- Branch Image -->
+        <div class="col-md-4">
+            <img src="{{ branch.branch_img.url }}" class="img-fluid rounded" alt="{{ branch.name }}">
+        </div>
+
+        <!-- Branch Info -->
+        <div class="col-md-5">
+            <h3 class="text-primary mb-3">{{ branch.name }}</h3>
+            <p>Phone: {{ branch.phone_number }}</p>
+            <p>Email: {{ branch.email }}</p>
+            <p>Address: {{ branch.address }}</p>
+            <p>Zipcode: {{ branch.zipcode }}</p>
+        </div>
+
+        <!-- Booking Button -->
+        <div class="col-md-4 text-end text-center">
+            <div class="p-3 border rounded bg-light">
+                <a href="{% url 'create_booking' branch.branch_slug %}" class="btn btn-primary">Make a Booking</a>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}
