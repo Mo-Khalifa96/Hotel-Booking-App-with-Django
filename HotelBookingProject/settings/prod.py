@@ -4,15 +4,15 @@ from datetime import timedelta
 import dj_database_url   
 
 #Production Security Key
-SECRET_KEY = os.environ['PROD_SECRET_KEY']  #TODO
+SECRET_KEY = os.environ['PROD_SECRET_KEY']  
 
 #Debugging mode off
 DEBUG = False
 
-#ALLOWED_HOSTS = ['domain-name-here']   #TODO 
+#ALLOWED_HOSTS = ['domain-name-here']
 
 SITE_PROTOCOL = 'https'
-#SITE_DOMAIN = 'domain-name-here.com' #TODO
+#SITE_DOMAIN = 'domain-name-here.com' 
 
 
 #Database for production
@@ -21,7 +21,7 @@ DATABASES = {
 }
 
 
-#Email Settings for production  #TODO 
+#Email Settings for production  #
 EMAIL_HOST = os.environ['MAILGUN_SMTP_SERVER']
 EMAIL_HOST_USER = os.environ['MAILGUN_SMTP_USER']
 EMAIL_HOST_PASSWORD = os.environ['MAILGUN_SMTP_PASSWORD']
@@ -32,14 +32,14 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 
 
 #Celery Broker
-CELERY_BROKER_URL = os.environ['REDIS_URL']  #TODO
+CELERY_BROKER_URL = os.environ['REDIS_URL']  
 
 
 #Caching settings for production 
 CACHES = {
     'default': {
         'BACKEND': 'django_redis.cache.RedisCache', 
-        'LOCATION': os.environ['REDIS_URL'], #TODO
+        'LOCATION': os.environ['REDIS_URL'], 
         'TIMEOUT': 60*10,
         'OPTIONS': {
             'CLIENT_CLASS': 'django_redis.client.DefaultClient',
