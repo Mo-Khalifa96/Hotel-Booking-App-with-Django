@@ -21,11 +21,11 @@ DATABASES = {
 }
 
 
-#Email Settings for production  #
-EMAIL_HOST = os.environ['MAILGUN_SMTP_SERVER']
-EMAIL_HOST_USER = os.environ['MAILGUN_SMTP_USER']
-EMAIL_HOST_PASSWORD = os.environ['MAILGUN_SMTP_PASSWORD']
-EMAIL_PORT = int(os.environ['MAILGUN_SMTP_PORT'])
+#Email Settings for production
+EMAIL_HOST = os.environ['BREVO_SMTP_SERVER']
+EMAIL_HOST_USER = os.environ['MBREVOSMTP_USER']
+EMAIL_HOST_PASSWORD = os.environ['BREVO_SMTP_PASSWORD']
+EMAIL_PORT = int(os.environ['BREVO_SMTP_PORT'])
 EMAIL_USE_TLS = True
 DEFAULT_FROM_EMAIL = 'no-reply@KhalifaHotels.com'  
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
