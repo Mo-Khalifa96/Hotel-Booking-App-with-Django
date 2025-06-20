@@ -35,6 +35,9 @@ RUN pipenv install --system --deploy --dev
 #Copy full app
 COPY . /app/
 
+#Make entrypoint script executable
+RUN chmod +x docker-entrypoint.sh
+
 #Expose port
 EXPOSE 8000
 
