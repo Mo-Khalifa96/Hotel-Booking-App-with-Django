@@ -25,6 +25,9 @@ fi
 IS_DOCKERIZED=$(printenv IS_DOCKERIZED | tr '[:upper:]' '[:lower:]')
 IS_DOCKERIZED=${IS_DOCKERIZED:-false}
 
+#Gunicorn socket directory
+mkdir -p /run/gunicorn
+
 GUNICORN_BIND=""
 if [ "$IS_DOCKERIZED" = "true" ]; then
   #for Dockerized environments (dev or prod), bind to Unix socket for Nginx
@@ -38,7 +41,11 @@ fi
 echo "Starting Gunicorn with bind: $GUNICORN_BIND"
 exec gunicorn HotelBookingProject.wsgi:application \
   --bind "$GUNICORN_BIND" \
-  --workers 4 \
+  --workers 3 \
   --threads 2 \
-  --timeout 90
+  --timeout 60 \
+  --preload \
+  --access-logfile - \
+  --error-logfile - \
+  --log-level info
 

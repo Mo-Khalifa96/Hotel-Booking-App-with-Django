@@ -9,6 +9,7 @@ services:
     volumes:
       - static-data:/app/static
       - media-data:/app/media
+      - gunicorn-socket:/run/gunicorn
     restart: always
     command: ./wait-for-it.sh mysql:3306 -- ./docker-entrypoint.sh
 
@@ -56,10 +57,11 @@ services:
     volumes:
       - static-data:/app/static
       - media-data:/app/media
+      - gunicorn-socket:/run/gunicorn
+      - ./nginx/ssl:/var/www/certbot
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro  
       - certbot-etc:/etc/letsencrypt
       - certbot-var:/var/lib/letsencrypt
-      - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro  
-      - ./nginx/ssl:/var/www/certbot
     depends_on:
       - web
 
@@ -71,6 +73,7 @@ services:
       - ./nginx/ssl:/var/www/certbot
 
 volumes:
+  gunicorn-socket:
   mysql-data: 
   redis-data:
   static-data:
