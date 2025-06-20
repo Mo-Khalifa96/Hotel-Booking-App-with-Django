@@ -23,7 +23,7 @@ DATABASES = {
 
 #Email Settings for production
 EMAIL_HOST = os.environ['BREVO_SMTP_SERVER']
-EMAIL_HOST_USER = os.environ['MBREVOSMTP_USER']
+EMAIL_HOST_USER = os.environ['BREVO_SMTP_USER']
 EMAIL_HOST_PASSWORD = os.environ['BREVO_SMTP_PASSWORD']
 EMAIL_PORT = int(os.environ['BREVO_SMTP_PORT'])
 EMAIL_USE_TLS = True
