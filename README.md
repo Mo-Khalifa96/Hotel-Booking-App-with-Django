@@ -56,7 +56,7 @@ A professional, full-featured hotel booking system built with **Django**, design
 | Backend         | Python, Django, Django REST Framework   |
 | Frontend        | Django Templates, Bootstrap             |
 | Auth            | JWT (Djoser), Custom User Model         |
-| Email           | Mailgun / SMTP / SMTP4Dev               |
+| Email           | Brevo / SMTP / SMTP4Dev               |
 | Background Jobs | Celery, Redis                           |
 | Database        | MySQL                                   |
 | Deployment      | Docker, Docker Compose, Gunicorn, Nginx |
