@@ -49,8 +49,7 @@ A professional, full-featured hotel booking system built with **Django**, design
 
 - A dedicated backend-only implementation using Django REST Framework
 - Fully decoupled API for frontend integration or mobile apps
-- JWT authentication via **Djoser**
-- Interactive documentation available at `/api/docs/`
+- JWT authentication via **Djoser** and SimpleJWT
 
 ---
 
@@ -60,8 +59,8 @@ A professional, full-featured hotel booking system built with **Django**, design
 | --------------- | --------------------------------------- |
 | Backend         | Python, Django, Django REST Framework   |
 | Frontend        | Django Templates, Bootstrap             |
-| Auth            | JWT (Djoser), Custom User Model         |
-| Email           | Brevo / SMTP / SMTP4Dev               |
+| Auth            | JWT, Djoser, Custom User Model          |
+| Email           | Brevo / SMTP / SMTP4Dev                 |
 | Background Jobs | Celery, Redis                           |
 | Database        | MySQL                                   |
 | Deployment      | Docker, Docker Compose, Gunicorn, Nginx |
@@ -90,6 +89,7 @@ HotelBookingProject/
 
 ### 🐳 Docker Running Containers
 ![Docker Screenshot](screenshots/docker_img.png)
+
 
 ---
 
