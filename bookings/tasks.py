@@ -4,7 +4,7 @@ from celery import shared_task
 from django.utils import timezone
 from bookings.models import Booking
 from accounts.utils import EmailThread
-from datetime import datetime, timedelta
+from datetime import date, timedelta
 from django.template.loader import render_to_string
 
 #Instantiate logger 
@@ -22,13 +22,12 @@ def get_booking_detail_url(booking_id):
 @shared_task(bind=True)
 def cleanup_expired_bookings_task(self):
     try:
-        today = datetime.date.today()
+        today = date.today()
         expired_bookings = Booking.objects.filter(check_out_date__lt=today)
         expired_bookings.update(is_deleted=True)
     except Exception as exc:
         logger.error(f'\nCleaning up expired bookings task failed:\n{exc}.\n\nTrying again...')
         self.retry(exc=exc, countdown=60, max_retries=10, retry_backoff=True, retry_backoff_max=60*5)
-
 
 
 #Reminder email one day before check-in task
