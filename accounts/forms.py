@@ -37,7 +37,7 @@ class GuestRegistrationForm(UserCreationForm):
     class Meta:
         model = User
         fields = ['first_name', 'last_name', 'phone_number', 'email', 'gender', 'date_of_birth',
-                  'id_number', 'profile_picture', 'password1', 'password2']
+                  'nationality', 'id_number', 'profile_picture', 'password1', 'password2']
     
 
 #Login Form 
