@@ -2,15 +2,16 @@ import os
 import sys
 import re
 import django
-import csv
 import random
 from datetime import timedelta
 from faker import Faker
 from django.core.exceptions import ValidationError
 from django.db import transaction
+from pathlib import Path
 
 #Add project root to sys.path
-sys.path.append('/Users/mmd96/Desktop/My Folders/Python/Completed Projects/19. Hotel Booking App (Built with Django)/HotelBookingProject')
+BASE_DIR = Path(__file__).resolve().parent
+sys.path.append(str(BASE_DIR))
 
 #Set up Django environment
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'HotelBookingProject.settings.dev')
