@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<meta http-equiv="refresh" content="5;url={{ login_url }}" />
+
+<div class="container py-5 text-center">
+    <h2 class="mb-4">🎉 Registration Successful!</h2>
+    <p class="lead">Thank you for registering. Your account has been created successfully.</p>
+    <p>You will be redirected to the login page shortly...</p>
+    <br>
+    <p><a href="{{ login_url }}">Click here</a> if you’re not redirected automatically.</p>
+</div>
+
+{% endblock %}

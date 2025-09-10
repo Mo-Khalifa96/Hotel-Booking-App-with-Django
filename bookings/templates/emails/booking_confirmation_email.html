@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Booking Confirmation</title>
+</head>
+
+<body style="font-family: Verdana, Geneva, Tahoma, sans-serif; background-color: whitesmoke; padding: 40px;">
+    <div
+        style="max-width: 700px; margin: auto; background-color: rgba(255,255,255,0.95); padding: 30px 40px; border-radius: 10px; box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);">
+
+        <!-- Header -->
+        <div
+            style="background: radial-gradient(rgb(188, 188, 206), #222324 65%); color: ghostwhite; padding: 25px; border-radius: 8px 8px 0 0;">
+            <h2 style="margin: 0;">Booking Confirmed – Khalifa Hotels</h2>
+            <p style="margin: 5px 0 0 0;">We’re excited to host you</p>
+        </div>
+
+        <!-- Body -->
+        <div style="padding: 25px 0 0 0;">
+            <p style="font-size: 16px;">Dear {{ booking.guest_first_name }} {{ booking.guest_last_name }},</p>
+
+            <p>Thank you for choosing Khalifa Hotels. We’re pleased to inform you that your booking has been confirmed successfully.</p>
+
+            <p>Here are your booking details:</p>
+
+            <div style="background-color: #f1f3f5; padding: 20px; border-radius: 8px; margin: 20px 0;">
+                <p><strong>Guest Name:</strong> {{ booking.guest_first_name }} {{ booking.guest_last_name }}</p>
+                <p><strong>Phone Number:</strong> {{ booking.phone_number }}</p>
+                <p><strong>Email:</strong> {{ booking.email }}</p>
+                <p><strong>Branch:</strong> {{ booking.branch.name }}</p>
+                <p><strong>Room Number:</strong> {{ booking.room.room_number }}</p>
+                <p><strong>Check-in Date:</strong> {{ booking.check_in_date }}</p>
+                <p><strong>Check-out Date:</strong> {{ booking.check_out_date }}</p>
+            </div>
+            <br>
+            <br>
+            <div style="text-align: center; margin: 30px 0;">
+                <p>You can change your booking up to <strong>24 hours in advance</strong> of your check-in date.</p>
+                <a href="{{ booking_detail_url }}"
+                    style="background-color: steelblue; color: ghostwhite; padding: 12px 24px; border-radius: 6px; text-decoration: none; font-weight: bold; display: inline-block;">
+                    View or Change Your Booking
+                </a>
+            </div>
+            <br>
+
+            <p>We look forward to welcoming you. If you have any questions or need assistance before your stay, feel
+                free to reach out to us.</p>
+
+            <p style="margin-top: 40px;">Warm regards,</p>
+            <p style="font-style: italic;">Khalifa Hotels</p>
+        </div>
+    </div>
+</body>
+
+</html>

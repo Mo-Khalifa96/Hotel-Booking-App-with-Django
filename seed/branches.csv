@@ -1,0 +1,6 @@
+"id","name","address","zipcode","phone_number","email","website","rating","branch_slug","branch_img"
+1,Khalifa Hill,"265 Wise MountWest Danielland, SD 16873","48900",+18152258220,khalifahill@example.com,https://khalifahill.com/,4.9,khalifa-hill,branch_images/istockphoto-96830872-612x612_Yejpxch.jpg
+2,Khalifa Deluxe,"92492 Kurt VillagesParkerview, NV 49327","02265",+12125552361,khalifadeluxe@example.org,https://khalifadeluxe.com/,3.1,khalifa-deluxe,branch_images/istockphoto-1077122292-612x612.jpg
+3,Khalifa Springs,"96789 Campbell SpringsStewartchester, NV 29063","32539",+14426777683,khalifasprings@example.org,http://www.khalifasprings.com/,4.5,khalifa-springs,branch_images/istockphoto-1316808694-612x612.jpg
+4,New Khalifa,"59214 Carlson VillagesJulieview, PA 06823","86991",+17084278797,newkhalifa@example.com,https://www.newkhalifa.com/,3.9,new-khalifa,branch_images/istockphoto-2206685915-612x612.jpg
+5,Khalifa Port Suite,"33973 Lopez Port Suite 009Wilkersonhaven, ID 76907","78685",+19133110371,khalifaportsuite@example.org,https://www.khalifaportsuite.com,4.2,khalifa-port-suite,branch_images/istockphoto-521247415-612x612.jpg

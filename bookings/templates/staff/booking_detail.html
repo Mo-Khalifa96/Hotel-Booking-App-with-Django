@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="text-end my-1 me-4">
+    <a href="{% url 'staff_logout' %}" class="btn btn-outline-danger btn-sm">Logout</a>
+</div>
+
+<div class="container mt-4" style="max-width: 700px;">
+    <h3 class="mb-4 text-center">Booking Details</h3>
+
+    <div class="border p-4 rounded shadow-sm">
+        <p><strong>Branch:</strong> {{ branch.name }}</p>
+        <p><strong>Room Number:</strong> {{ booking_detailed.room.room_number }}</p>
+        <p><strong>Room Type:</strong> {{ booking_detailed.room.room_type }}</p>
+        <p><strong>Guest Name:</strong> {{ booking_detailed.guest_first_name }} {{ booking_detailed.guest_last_name }}</p>
+        <p><strong>Email:</strong> {{ booking_detailed.email }}</p>
+        <p><strong>Phone Number:</strong> {{ booking_detailed.phone_number }}</p>
+        <p><strong>Check-in Date:</strong> {{ booking_detailed.check_in_date }}</p>
+        <p><strong>Check-out Date:</strong> {{ booking_detailed.check_out_date }}</p>
+        <p><strong>Booking Date:</strong> {{ booking_detailed.booking_date }}</p>
+        <p><strong>Special Requests:</strong> {{ booking_detailed.special_requests|default:"None" }}</p>
+    </div>
+
+    <div class="d-flex justify-content-between mt-4">
+        <a href="{% url 'bookings_by_branch' branch.branch_slug %}" class="btn btn-secondary">
+            Back to Bookings
+        </a>
+        <a href="{% url 'delete_booking_staff' branch.branch_slug booking_detailed.room.room_number %}"
+            class="btn btn-danger" style="background-color:crimson;">
+            Delete Booking
+        </a>
+    </div>
+</div>
+{% endblock %}

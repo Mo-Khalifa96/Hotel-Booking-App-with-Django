@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<meta http-equiv="refresh" content="5;url={% url 'guest_home' %}" />
+
+<div class="container mt-5 text-center">
+    <h2 class="text-success">Booking Updated Successfully!</h2>
+    <p class="mt-3">Your updated booking has been saved.</p>
+    <br>
+    <p>Redirecting back to the guest page...</p>
+    <p><a href="{% url 'guest_home' %}">Click here</a> if you’re not redirected automatically.</p>
+</div>
+{% endblock %}

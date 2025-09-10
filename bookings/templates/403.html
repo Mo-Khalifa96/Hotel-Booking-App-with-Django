@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h2>Access Denied</h2>
+<p>{{ exception }}</p> 
+
+<a href="{% url 'home' %}">Go back to home</a>
+
+{% endblock %}

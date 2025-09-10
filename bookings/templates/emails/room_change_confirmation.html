@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Room Change Confirmation</title>
+</head>
+
+<body style="font-family: Verdana, Geneva, Tahoma, sans-serif; background-color: whitesmoke; padding: 40px;">
+    <div
+        style="max-width: 700px; margin: auto; background-color: rgba(255,255,255,0.95); padding: 30px 40px; border-radius: 10px; box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);">
+        <div
+            style="background: radial-gradient(rgb(188, 188, 206), #222324 65%); color: ghostwhite; padding: 25px; border-radius: 8px 8px 0 0;">
+            <h2 style="margin: 0;">Room Change Confirmed – Khalifa Hotels</h2>
+            <p style="margin: 5px 0 0 0;">Your room change has been processed successfully</p>
+        </div>
+
+        <div style="padding: 25px 0 0 0;">
+            <p style="font-size: 16px;">Dear {{ booking.guest_first_name }} {{ booking.guest_last_name }},</p>
+
+            <p>Your room has been changed from <strong>Room {{ old_room.room_number }}</strong> to <strong>Room {{booking.room.room_number }}</strong>.</p>
+
+            <div style="background-color: #f1f3f5; padding: 20px; border-radius: 8px; margin: 20px 0;">
+                <p><strong>Guest Name:</strong> {{ booking.guest_first_name }} {{ booking.guest_last_name }}</p>
+                <p><strong>Phone Number:</strong> {{ booking.phone_number }}</p>
+                <p><strong>Branch:</strong> {{ booking.branch.name }}</p>
+                <p><strong>New Room Number:</strong> {{ booking.room.room_number }}</p>
+                <p><strong>Check-in Date:</strong> {{ booking.check_in_date }}</p>
+                <p><strong>Check-out Date:</strong> {{ booking.check_out_date }}</p>
+            </div>
+
+            <p>We look forward to welcoming you!</p>
+
+            <p style="margin-top: 40px;">Warm regards,</p>
+            <p style="font-style: italic;">Khalifa Hotels</p>
+        </div>
+    </div>
+</body>
+
+</html>

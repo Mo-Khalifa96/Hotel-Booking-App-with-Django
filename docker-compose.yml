@@ -1,0 +1,213 @@
+# Base docker compose file (for dev)
+
+services:
+  web:
+    build: .
+    container_name: hotelbookingapp-web-dev
+    command: ./wait-for-it.sh postgres:5432 -- ./docker-entrypoint.dev.sh
+    restart: always
+    env_file:
+      - .env
+    environment:
+      SERVICE: web
+      DJANGO_SETTINGS_MODULE: HotelBookingProject.settings.dev
+    ports:
+      - 8000:8000
+    volumes:
+      - .:/app
+      - ./logs:/app/logs
+      - media-data:/app/media
+      - static-data:/app/static
+      - gunicorn-socket:/run/gunicorn  
+    depends_on:
+      postgres:
+        condition: service_healthy
+    networks:
+      - hotelbookingapp-network
+    healthcheck:
+      test: ["CMD", "python", "manage.py", "check", "--database", "default"]
+      retries: 5
+      timeout: 10s
+      interval: 20s
+      start_period: 60s
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "20m"
+        max-file: "1"
+
+  postgres:
+    image: postgres:17-alpine
+    container_name: hotelbookingapp-postgres-dev
+    restart: always
+    environment:
+      POSTGRES_DB: ${DEV_DB_NAME}
+      POSTGRES_USER: ${DEV_DB_USER}
+      POSTGRES_PASSWORD: ${DEV_DB_PASSWORD}
+    ports:
+      - "5433:5432"  
+    volumes:
+      - pg-data:/var/lib/postgresql/data
+    networks:
+      - hotelbookingapp-network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $$POSTGRES_USER -d $$POSTGRES_DB"]
+      retries: 5
+      timeout: 10s
+      interval: 5s
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "1"
+
+  smtp4dev:
+    container_name: hotelbookingapp-smtp4dev
+    image: rnwood/smtp4dev:v3
+    ports:
+      - 5025:80 
+    restart: always
+    profiles: ["dev"]
+    networks:
+      - hotelbookingapp-network
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "5m"
+        max-file: "1"
+
+  redis:
+    image: redis:7.2-alpine
+    container_name: hotelbookingapp-redis-dev
+    restart: always
+    ports:
+      - 6379:6379
+    volumes:
+      - redis-data:/data
+    networks:
+      - hotelbookingapp-network
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      retries: 5
+      timeout: 10s
+      interval: 60s
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "5m"
+        max-file: "1"
+
+  celery:
+    build: .
+    container_name: hotelbookingapp-celery-dev
+    user: "1001:1001"
+    command: ./wait-for-it.sh redis:6379 -- celery -A HotelBookingProject worker --loglevel=info
+    env_file:
+      - .env
+    environment:
+      SERVICE: celery
+      DJANGO_SETTINGS_MODULE: HotelBookingProject.settings.dev
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    volumes:
+      - .:/app
+      - ./logs:/app/logs
+    networks:
+      - hotelbookingapp-network
+    healthcheck:
+      test: ["CMD", "celery", "-A", "HotelBookingProject", "inspect", "ping"]
+      retries: 5
+      timeout: 10s
+      interval: 30s
+      start_period: 60s
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "5m"
+        max-file: "1"
+
+  celery-beat:
+    build: .
+    container_name: hotelbookingapp-celerybeat-dev
+    user: "1001:1001"
+    command: ./wait-for-it.sh postgres:5432 -- ./wait-for-it.sh redis:6379 -- celery -A HotelBookingProject beat --loglevel=info
+    env_file:
+      - .env
+    environment:
+      SERVICE: celery-beat
+      DJANGO_SETTINGS_MODULE: HotelBookingProject.settings.dev
+    volumes:
+      - .:/app
+      - ./logs:/app/logs
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    networks:
+      - hotelbookingapp-network
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "5m"
+        max-file: "1"
+
+  flower:
+    build: .
+    container_name: hotelbookingapp-flower
+    command: ./wait-for-it.sh redis:6379 -- celery -A HotelBookingProject flower
+    profiles: ["dev"]
+    environment:
+      - DEBUG=1
+      - CELERY_BROKER=redis://redis:6379/0
+      - CELERY_BACKEND=redis://redis:6379/0
+    depends_on:
+      web:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+      celery:
+        condition: service_healthy
+    ports:
+      - 5555:5555
+    networks:
+      - hotelbookingapp-network
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "2m"
+        max-file: "1"
+
+  tests:
+    build: .
+    container_name: hotelbookingapp-tests
+    command: ./wait-for-it.sh postgres:5432 -- ptw --poll -- -v -x
+    tty: true
+    profiles: ["dev"]
+    environment:
+      - DJANGO_SETTINGS_MODULE=HotelBookingProject.settings.dev
+      - PYTHONWARNINGS=ignore::SyntaxWarning
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    volumes:
+      - .:/app
+    networks:
+      - hotelbookingapp-network
+
+networks:
+  hotelbookingapp-network:
+    driver: bridge
+
+volumes:
+  pg-data:
+  redis-data:
+  gunicorn-socket:
+  static-data:
+  media-data:
+

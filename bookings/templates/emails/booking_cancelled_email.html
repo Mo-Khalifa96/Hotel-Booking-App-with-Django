@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Booking Cancellation Confirmation</title>
+</head>
+
+<body style="font-family: Verdana, Geneva, Tahoma, sans-serif; background-color: whitesmoke; padding: 40px;">
+    <div
+        style="max-width: 700px; margin: auto; background-color: rgba(255,255,255,0.95); padding: 30px 40px; border-radius: 10px; box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);">
+
+        <!-- Header -->
+        <div
+            style="background: radial-gradient(rgb(188, 188, 206), #222324 65%); color: ghostwhite; padding: 25px; border-radius: 8px 8px 0 0;">
+            <h2 style="margin: 0;">Booking Cancelled – Khalifa Hotels</h2>
+            <p style="margin: 5px 0 0 0;">We're sorry to see you go</p>
+        </div>
+
+        <!-- Body -->
+        <div style="padding: 25px 0 0 0;">
+            <p style="font-size: 16px;">Dear {{ booking.guest_first_name }} {{ booking.guest_last_name }},</p>
+
+            <p>Your booking has been cancelled successfully. We're sorry that you won't be joining us this time.</p>
+
+            <p>Here are the details of your cancelled booking:</p>
+
+            <div style="background-color: #f1f3f5; padding: 20px; border-radius: 8px; margin: 20px 0;">
+                <p><strong>Guest Name:</strong> {{ booking.guest_first_name }} {{ booking.guest_last_name }}</p>
+                <p><strong>Phone Number:</strong> {{ booking.phone_number }}</p>
+                <p><strong>Email:</strong> {{ booking.email }}</p>
+                <p><strong>Branch:</strong> {{ booking.branch.name }}</p>
+                <p><strong>Room Number:</strong> {{ booking.room.room_number }}</p>
+                <p><strong>Check-in Date:</strong> {{ booking.check_in_date }}</p>
+                <p><strong>Check-out Date:</strong> {{ booking.check_out_date }}</p>
+            </div>
+
+            <p>If you believe this cancellation was made in error or you need any assistance, please contact our support team and we
+                will be happy to assist you.</p>
+
+            <p style="margin-top: 40px;">We hope to welcome you in the future.</p>
+            <p style="font-style: italic;">Khalifa Hotels</p>
+        </div>
+    </div>
+</body>
+
+</html>

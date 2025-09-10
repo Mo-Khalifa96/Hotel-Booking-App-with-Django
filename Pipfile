@@ -1,0 +1,43 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+django = "*"
+requests = "*"
+djangorestframework = "*"
+psycopg = {extras = ["binary"], version = "*"}
+python-dotenv = "*"
+django-dotenv = "*"
+django-filter = "*"
+djangorestframework-simplejwt = "*"
+djoser = "*"
+django-rest-authemail = "*"
+phonenumbers = "*"
+celery = "*"
+django-celery-beat = "*"
+django-celery-results = "*"
+django-redis = "*"
+dj-database-url = "*"
+redis = "*"
+hiredis = "*"
+pillow = "*"
+locust = "*"
+gunicorn = "*"
+django-widget-tweaks = "*"
+croniter = "*"
+awscli = "*"
+
+[dev-packages]
+pytest = "*"
+pytest-django = "*"
+pytest-watch = "*"
+django-debug-toolbar = "*"
+django-silk = "*"
+model-bakery = "*"
+faker = "*"
+flower = "*"
+
+[requires]
+python_version = "3.12"
