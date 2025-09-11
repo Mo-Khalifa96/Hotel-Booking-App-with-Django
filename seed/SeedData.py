@@ -10,7 +10,7 @@ from django.db import transaction
 from pathlib import Path
 
 #Add project root to sys.path
-BASE_DIR = Path(__file__).resolve().parent
+BASE_DIR = Path(__file__).resolve().parent.parent
 sys.path.append(str(BASE_DIR))
 
 #Set up Django environment
@@ -148,8 +148,11 @@ def populate_bookings(total_bookings):
             room.is_available = False
             room.save()
 
+            print('Bookings created successfully.')
+
         except ValidationError as e:
             print(f"Validation error while creating booking: {e}")
+
         except Exception as e:
             print(f"Skipping booking due to error: {e}")
 
@@ -159,5 +162,5 @@ if __name__ == '__main__':
     print('Importing and populating data...')
     #import_branches_data('branches.csv')
     #import_rooms_data('rooms.csv')
-    populate_bookings(20)
+    populate_bookings(50)
     print('Database successfully populated.')
